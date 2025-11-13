@@ -1,0 +1,50 @@
+﻿
+	@media all {
+
+		body							{ margin: 0px 0px 0px 0px; height: 100vh; background-color: black; overflow: hidden; }
+		
+		.inpProg,
+		.inpCont,
+		.inpDef,
+		.inpRoll						{ display: none; }
+		[data-input="prog"] .inpProg	{ display: block; }
+		[data-input="cont"] .inpCont	{ display: block; }
+		[data-input="roll"] .inpRoll	{ display: block; }
+		[data-input="def"] .inpDef		{ display: block; }
+		
+		[data-input="loading"]			{ pointer-events: none; opacity: .8; }
+		.form .input,
+		body							{ color: green; font-family: monospace, sans-serif; font-size: 16px; line-height: 18px; }
+		.mainContainer					{ margin-bottom: 60px; display: flex; height: calc(100% - 120px); }
+		.terminal						{ flex: 3; display: flex; flex-direction: column-reverse; overflow-y: scroll; overflow-x: hidden; }
+		.terminal .scrollhelper			{ display: flex; justify-content: flex-end; flex-direction: column; }
+		.terminal .scrollhelper div.own	{ margin-left: 0%; }
+		.terminal .scrollhelper div.fgn	{ margin-right: 0%; }
+		.terminal .scrollhelper p		{ margin-top: 10px; }
+		.terminal .scrollhelper i		{ font-style: normal; }
+		.terminal .scrollhelper .keyword	{ color: teal; }
+		.terminal .scrollhelper .error		{ color: red; }
+		.terminal .scrollhelper .warn		{ color: orange; }
+		.terminal .scrollhelper .cmd		{ color: gray; font-size: .75em; font-style: italic; }
+		.status							{ width: 120px; font-size: 12px; }
+		.status > div + div				{ margin-top: 8px; padding-top: 8px; border-top: 1px solid currentColor; }
+		.top							{ background: black; display: flex; align-items: center; position: fixed; top: 0px; left: 0px; z-index: 5; width: 100%; height: 60px; padding: 5px; box-sizing: border-box; }
+		.top a							{ color: green; text-decoration: none; flex: 1; }
+		.editable.singleRow				{ white-space: nowrap; overflow: hidden; }
+		.editable.singleRow br 			{ display:none; }
+		.editable.singleRow * 			{ display:inline; white-space:nowrap; }
+		.form							{ background-color: rgb(15,15,15); display: flex; align-items: stretch; position: fixed; bottom: 0px; left: 0px; z-index: 5; width: 100%; height: 60px; padding: 5px; box-sizing: border-box; }
+		[data-input="prog"] .form .progContainer	{ flex: 1; display: flex; flex-wrap: wrap; }
+		.form .progContainer .full		{ width: 100%; text-align: center; }
+		.form .progContainer .third		{ width: 33.333%; text-align: center; }
+		.form .singleRow				{ line-height: 20px; height: 20px; padding: 15px 0px; overflow-y: hidden; outline: none; }
+		.form .contButton,
+		.form .rollButton				{ flex: 1; text-align: center; text-transform: uppercase; }
+		.form .btn						{ text-transform: uppercase; text-align: center; cursor: pointer; }
+		.form .input					{ flex: 1; border: 0; }
+		.form .input:after				{ content: '\2588'; transform: translateX(-100%); animation: blinker 1s linear infinite; }
+		.form .submit					{ flex-grow: 0; width: 60px; }
+		.form .submit.roll				{ flex-grow: 1; }
+
+	}
+	@keyframes blinker {50% {opacity: 0;}}
