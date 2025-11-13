@@ -1,5 +1,6 @@
 using System.Net.WebSockets;
 using System.Text;
+using System.Threading.Tasks;
 
 public abstract class SocketHandler
 {
@@ -79,26 +80,16 @@ public abstract class SocketHandler
 		
 		foreach (var client in clients.Where(x => x.roomIdentifier == output.actor.roomIdentifier))
 		{
+			if (client == output.actor)
+				continue;
+			
 			client.Socket?.SendOutput(output.text, false);
 		}
 	}
-	// public string GetOutput(GameCharacter localPlayer)
-	// {
-	// 	var text = new StringBuilder();
+	protected async Task PushUnlock () {
+		if (Socket == null)
+			return;
 		
-	// 	foreach (var item in ConsoleOutput)
-	// 	{
-	// 		if (
-	// 			item.type == OutputType.Global ||
-	// 			// (item.type == OutputType.Public && item.container == (localPlayer != null ? localPlayer.Container : null)) ||
-	// 			(item.type == OutputType.OtherOnly && item.actor != localPlayer) ||
-	// 			(item.type == OutputType.OwnOnly && item.actor == localPlayer)
-	// 		)
-	// 		{
-	// 			text.Append($"<log>{item.text}</log>");
-	// 		}
-	// 	}
-		
-	// 	return $"<div class=\"scrollhelper\">{text}</div>";
-	// }
+		await Socket.Send("u|-");
+	}
 }

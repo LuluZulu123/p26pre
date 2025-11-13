@@ -8,5 +8,6 @@ public class Chat : SocketHandler
 	{
 		Console.WriteLine($"HanldeInput in {GetType()} > \"{raw}\" by client {identifier}");
 		await PrintRoom($">>>{raw}");
+		await PushUnlock();
 	}
 }
