@@ -2,7 +2,7 @@
 const button = document.querySelector("button");
 const output = document.querySelector("#output");
 const textarea = document.querySelector("textarea");
-const wsUri = "ws://127.0.0.1:8026/";
+const wsUri = "ws://localhost:5000/o/chat";
 const websocket = new WebSocket(wsUri);
 
 button.addEventListener("click", onClickButton);
