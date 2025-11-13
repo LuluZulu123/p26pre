@@ -6,7 +6,7 @@ public class Chat : SocketHandler
 {
 	protected override async Task HanldeInput(string raw)
 	{
-		// await PrintGlobal($">>>{raw}");
+		Console.WriteLine($"HanldeInput in {GetType()} > \"{raw}\" by client {identifier}");
 		await PrintRoom($">>>{raw}");
 	}
 }

@@ -1,18 +1,15 @@
 using System.Net.WebSockets;
 using System.Text;
-using System.Threading.Tasks;
-using cx3web.WorldObjects;
 
 public abstract class SocketHandler
 {
 	protected abstract Task HanldeInput (string raw);
+	public string identifier => GetHashCode().ToString();
+	public override string ToString() {
+		return identifier;
+	}
     public object? roomIdentifier;
 	private static HashSet<SocketHandler> clients = new HashSet<SocketHandler>();
-	List<Output> ConsoleOutput = new List<Output>();
-	public const string inputCursor = "> ";
-	public const string delimeter = "********************";
-	public const int maxlines = 150;
-	private string lastPrintedTime = "";
 	public WebSocket? Socket {get; private set;}
 	public async Task AddClinet(WebSocket Socket) {
 		this.Socket = Socket;
