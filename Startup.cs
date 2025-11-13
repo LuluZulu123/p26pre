@@ -71,14 +71,14 @@ public class Startup
 
 			mechanics.Cleanup();
 			
-			var localPlayer = mechanics.GetSetPlayer(charname, pass);
+			// var localPlayer = mechanics.GetSetPlayer(charname, pass);
 
-			localPlayer.lastAction = DateTime.Now;
+			// localPlayer.lastAction = DateTime.Now;
 			
 			if (context.Request.Path.HasValue)
 			{
 				// if (context.Request.Path.StartsWithSegments("s") == "/o/websocket")
-				if (context.Request.Path.StartsWithSegments("o"))
+				if (context.Request.Path.StartsWithSegments("/o"))
 				{
 					if (context.WebSockets.IsWebSocketRequest)
 					{
@@ -89,9 +89,7 @@ public class Startup
 						// context.Request.Headers.Add("proxy_set_header", new string[2]{"Upgrade \"websocket\"", "Connection \"upgrade\""});
 						// context.Request.Headers["accept-encoding"] = "gzip;q=0,deflate,sdch";
 						
-						localPlayer.socket = await context.WebSockets.AcceptWebSocketAsync();
-						
-						await mechanics.terminal.PrintGlobal($"{localPlayer} rejoined");
+						var socket = await context.WebSockets.AcceptWebSocketAsync();
 						
 						var parts = context.Request.Path.Value.Split('/');
 						var project = parts.Last();
@@ -111,7 +109,7 @@ public class Startup
 							throw new ArgumentException($"{newType} does not implement SocketHandler");
 						}
 						
-						await handler.AddClinet(localPlayer);
+						await handler.AddClinet(socket);
 						
 						// await SocketHandler(localPlayer);
 					}

@@ -122,7 +122,7 @@
 			});
 	}
 
-	var socket = new WebSocket('ws://' + location.host + '/o/websocket');
+	var socket = new WebSocket('ws://' + location.host + '/o/' + prompt('handler'));
 
 	socket.onopen = function () {
 		showInterface('def');

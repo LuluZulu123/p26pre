@@ -1,6 +1,6 @@
 public enum OutputType {
     Global,
-    Public,
+    Room,
     OwnOnly,
     OtherOnly
 }

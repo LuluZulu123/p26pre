@@ -29,27 +29,27 @@ public partial class TerminalConsole
 		// PrintGlobal(delimeter.AsCommand());
 	}
 	private string lastPrintedTime = "";
-	public async Task PrintGlobal(string text)
-	{
-		await mechanics.terminal.Print(new Output(text, OutputType.Global));
-	}
+	// public async Task PrintGlobal(string text)
+	// {
+	// 	await mechanics.terminal.Print(new Output(text, OutputType.Global));
+	// }
 	public async Task Print(Output output)
 	{
-		if (output.type == OutputType.Global) {
-			foreach (var player in mechanics.players)
-			{
-				if (player.socket == null)
-					continue;
+		// if (output.type == OutputType.Global) {
+		// 	foreach (var player in mechanics.players)
+		// 	{
+		// 		if (player.socket == null)
+		// 			continue;
 				
-				await player.socket.SendOutput(output.text, player == output.actor);
-			}
-			return;
-		}
+		// 		await player.socket.SendOutput(output.text, player == output.actor);
+		// 	}
+		// 	return;
+		// }
 
-		if (output.type != OutputType.OtherOnly)
-			output.actor.socket?.SendOutput(output.text);
+		// if (output.type != OutputType.OtherOnly)
+		// 	output.actor.Socket?.SendOutput(output.text);
 		
-		if (output.type == OutputType.OwnOnly)
+		// if (output.type == OutputType.OwnOnly)
 			return;
 		
 		// foreach (var player in mechanics.world.GetRoommatesOf(output.actor))
@@ -62,23 +62,23 @@ public partial class TerminalConsole
 		// if (ConsoleOutput.Count >= maxlines)
 		// 	ConsoleOutput.RemoveAt(0);
 	}
-	public string GetOutput(GameCharacter localPlayer)
-	{
-		var text = new StringBuilder();
+	// public string GetOutput(GameCharacter localPlayer)
+	// {
+	// 	var text = new StringBuilder();
 		
-		foreach (var item in ConsoleOutput)
-		{
-			if (
-				item.type == OutputType.Global ||
-				// (item.type == OutputType.Public && item.container == (localPlayer != null ? localPlayer.Container : null)) ||
-				(item.type == OutputType.OtherOnly && item.actor != localPlayer) ||
-				(item.type == OutputType.OwnOnly && item.actor == localPlayer)
-			)
-			{
-				text.Append($"<log>{item.text}</log>");
-			}
-		}
+	// 	foreach (var item in ConsoleOutput)
+	// 	{
+	// 		if (
+	// 			item.type == OutputType.Global ||
+	// 			// (item.type == OutputType.Public && item.container == (localPlayer != null ? localPlayer.Container : null)) ||
+	// 			(item.type == OutputType.OtherOnly && item.actor != localPlayer) ||
+	// 			(item.type == OutputType.OwnOnly && item.actor == localPlayer)
+	// 		)
+	// 		{
+	// 			text.Append($"<log>{item.text}</log>");
+	// 		}
+	// 	}
 		
-		return $"<div class=\"scrollhelper\">{text}</div>";
-	}
+	// 	return $"<div class=\"scrollhelper\">{text}</div>";
+	// }
 }

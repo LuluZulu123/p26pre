@@ -2,8 +2,9 @@ namespace Handlers;
 
 public class PaR : SocketHandler
 {
-	protected override void HanldeInput(string raw)
+	protected override Task HanldeInput(string raw)
 	{
 		Console.WriteLine($"HanldeInput in {this} > \"{raw}\"");
+		return Task.CompletedTask;
 	}
 }
