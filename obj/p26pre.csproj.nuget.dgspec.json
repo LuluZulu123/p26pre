@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj": {}
+    "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\p26pre.csproj": {}
   },
   "projects": {
-    "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj": {
+    "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\p26pre.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj",
+        "projectUniqueName": "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\p26pre.csproj",
         "projectName": "p26pre",
-        "projectPath": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj",
+        "projectPath": "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\p26pre.csproj",
         "packagesPath": "C:\\Users\\lukask\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\obj\\",
+        "outputPath": "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\lukask\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -44,6 +44,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.10, )",
+              "autoReferenced": true
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,6 +63,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
+              "version": "[9.0.10, 9.0.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[9.0.10, 9.0.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.linux-x64",
+              "version": "[9.0.10, 9.0.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -64,6 +86,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "linux-x64": {
+          "#import": []
         }
       }
     }

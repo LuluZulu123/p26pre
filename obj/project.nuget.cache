@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "NELRoOFlDIw=",
+  "dgSpecHash": "u8LhWAJBHCs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "G:\\Meine Ablage\\LuluZulu123\\Projekte\\Plans\\2026\\p26pre\\p26pre.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lukask\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.10\\microsoft.net.illink.tasks.9.0.10.nupkg.sha512",
+    "C:\\Users\\lukask\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-x64\\9.0.10\\microsoft.netcore.app.runtime.linux-x64.9.0.10.nupkg.sha512",
+    "C:\\Users\\lukask\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-x64\\9.0.10\\microsoft.aspnetcore.app.runtime.linux-x64.9.0.10.nupkg.sha512",
+    "C:\\Users\\lukask\\.nuget\\packages\\microsoft.netcore.app.host.linux-x64\\9.0.10\\microsoft.netcore.app.host.linux-x64.9.0.10.nupkg.sha512"
+  ],
   "logs": []
 }

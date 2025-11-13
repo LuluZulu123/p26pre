@@ -29,3 +29,4 @@ C:\Users\lukask\Documents\Resize on Request\p26pre\obj\Debug\net9.0\p26pre.pdb
 C:\Users\lukask\Documents\Resize on Request\p26pre\obj\Debug\net9.0\p26pre.genruntimeconfig.cache
 C:\Users\lukask\Documents\Resize on Request\p26pre\obj\Debug\net9.0\ref\p26pre.dll
 C:\Users\lukask\Documents\Resize on Request\p26pre\obj\Debug\net9.0\compressed\oz4ph2r9hu-co1p4p5ra5.gz
+C:\Users\lukask\Documents\Resize on Request\p26pre\obj\Debug\net9.0\p26pre.sourcelink.json
