@@ -1,3 +1,4 @@
+using System;
 using System.Net.WebSockets;
 using System.Text;
 using cx3web;
@@ -76,9 +77,9 @@ public class Startup
 			
 			if (context.Request.Path.HasValue)
 			{
-				if (context.Request.Path == "/o/websocket")
+				// if (context.Request.Path.StartsWithSegments("s") == "/o/websocket")
+				if (context.Request.Path.StartsWithSegments("o"))
 				{
-					Console.WriteLine($"context.WebSockets.IsWebSocketRequest {context.WebSockets.IsWebSocketRequest}");
 					if (context.WebSockets.IsWebSocketRequest)
 					{
 						// context.Response.Headers.Add("proxy_http_version", "1.1");
@@ -92,7 +93,27 @@ public class Startup
 						
 						await mechanics.terminal.PrintGlobal($"{localPlayer} rejoined");
 						
-						await SocketHandler(localPlayer);
+						var parts = context.Request.Path.Value.Split('/');
+						var project = parts.Last();
+						
+						var newType = System.Type.GetType($"Handlers.{project}", false, true);
+						
+						if (newType == null)
+						{
+							newType = typeof(Handlers.Generic);
+							Console.WriteLine($"handler not found {project}. Fallback to generic");
+						}
+						
+						var handler = Activator.CreateInstance(newType) as SocketHandler;
+						
+						if (handler == null)
+						{
+							throw new ArgumentException($"{newType} does not implement SocketHandler");
+						}
+						
+						await handler.AddClinet(localPlayer);
+						
+						// await SocketHandler(localPlayer);
 					}
 				}
 			}
@@ -164,64 +185,5 @@ public class Startup
 												</body>
 												");
 		}
-	}
-	private static async Task SocketHandler(GameCharacter localPlayer)
-	{
-		var webSocket = localPlayer.socket;
-		
-		Console.WriteLine($"socket for {localPlayer} == {webSocket}");
-		
-		if (webSocket == null)
-			return;
-
-		Console.WriteLine($"socket state for {localPlayer} == {webSocket.State}");
-		
-		if (webSocket.State != WebSocketState.Open)
-			return;
-
-		var buffer = new byte[1024 * 4];
-		
-		var first = true;
-		
-		WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-		
-		while (!result.CloseStatus.HasValue)
-		{
-			if (!first)
-				result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-			
-			first = false;
-			
-			var input = Encoding.UTF8.GetString(buffer, 0, result.Count).Trim();
-
-			Console.WriteLine($"recieved {input} from {localPlayer}");
-
-							if (string.IsNullOrEmpty(input)) {
-								localPlayer.PushUnlock();
-								continue;
-							}
-
-							// if (localPlayer.CheckProgressAction(input)) {
-							// 	localPlayer.PushUnlock();
-							// 	continue;
-							// }
-
-							// if (localPlayer.CheckContinue(input)) {
-							// 	localPlayer.PushUnlock();
-							// 	continue;
-							// }
-							
-							// if (localPlayer.diceRoll.CheckRolling(input))
-							// {
-							// 	localPlayer.PushUnlock();
-							// 	continue;
-							// }
-							
-							localPlayer.mechanics.HandleInput(localPlayer, input);
-							
-							localPlayer.PushUnlock();
-		}
-		
-		await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
 	}
 }
