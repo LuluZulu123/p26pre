@@ -36,5 +36,5 @@ jobs:
             local_path: './bin/Release/net9.0/linux-x64/publish'
             remote_path: '/var/socka'
             sftp_only: true
-            password: 42731211aI!ftp
+            password: ${{secrets.FTP_PASS}}
             
