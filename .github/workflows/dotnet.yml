@@ -22,24 +22,16 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: check
-      run: ls
-  deploy_job:
-    runs-on: ubuntu-latest
-    name: deploy
-    steps:
-      - name: check
-        run: ls
-      - name: Deploy file 93
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-        with:
-          username: www_deploy
-          server: 82.165.217.93
-          port: 22
-          # local_path: './*'
-          local_path: '/home/runner/work/p26pre/bin/Debug/net9.0/linux-x64/*'
-          # local_path: './bin/Release/net9.0/linux-x64/publish'
-          remote_path: '/var/socka'
-          sftp_only: true
-          password: ${{secrets.FTP_PASS}}
+    - name: Deploy file 93
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        username: www_deploy
+        server: 82.165.217.93
+        port: 22
+        # local_path: './*'
+        # local_path: '/home/runner/work/p26pre/bin/Debug/net9.0/linux-x64/*'
+        local_path: './bin/Release/net9.0/linux-x64/publish/*'
+        remote_path: '/var/socka'
+        sftp_only: true
+        password: ${{secrets.FTP_PASS}}
             
