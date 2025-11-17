@@ -33,7 +33,8 @@ jobs:
             server: 82.165.217.93
             port: 22
             # local_path: './*'
-            local_path: './bin/Release/net9.0/linux-x64/publish'
+            local_path: '/home/runner/work/p26pre/p26pre/bin/Debug/net9.0/linux-x64/*'
+            # local_path: './bin/Release/net9.0/linux-x64/publish'
             remote_path: '/var/socka'
             sftp_only: true
             password: ${{secrets.FTP_PASS}}
