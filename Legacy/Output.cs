@@ -1,5 +1,3 @@
-using cx3web.WorldObjects;
-
 public class Output {
     public string text;
     public SocketHandler actor;

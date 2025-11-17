@@ -67,13 +67,13 @@ public abstract class SocketHandler
 				if (client.Socket == null)
 					continue;
 				
-				await client.Socket.SendOutput(output.text, client == output.actor);
+				await client.Socket.Send(output.text);
 			}
 			return;
 		}
 
 		if (output.type != OutputType.OtherOnly)
-			output.actor.Socket?.SendOutput(output.text);
+			output.actor.Socket?.Send(output.text);
 		
 		if (output.type == OutputType.OwnOnly)
 			return;
@@ -83,7 +83,7 @@ public abstract class SocketHandler
 			if (client == output.actor)
 				continue;
 			
-			client.Socket?.SendOutput(output.text, false);
+			client.Socket?.Send(output.text);
 		}
 	}
 	protected async Task PushUnlock () {
