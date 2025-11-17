@@ -7,20 +7,7 @@ using cx3web.WorldObjects;
 
 public partial class TerminalConsole
 {
-	public Mechanics mechanics;
 	List<Output> ConsoleOutput = new List<Output>();
-	public void RunCommand(GameCharacter localPlayer, string text)
-	{
-		// var success = mechanics.navigation.TryToAct(localPlayer, text);
-		
-		// if (!success)
-		// 	mechanics.logger.Log(localPlayer, text);
-		
-		// if (localPlayer.diceRoll.rolling)
-		// 	return;
-
-		// localPlayer.parser.ClearSelection();
-	}
 	public const string inputCursor = "> ";
 	public const string delimeter = "********************";
 	public const int maxlines = 150;

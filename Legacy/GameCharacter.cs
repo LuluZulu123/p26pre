@@ -20,13 +20,11 @@ namespace cx3web.WorldObjects
 {
 	public partial class GameCharacter : FixedObject
 	{
-		public Mechanics mechanics;
 		private const int AttackCooldown = 60;
 		private const int DefenseCooldown = 60;
 		// public InputModes inputMode = InputModes.CommandMode;
 		// public Parser parser { get; private set; }
 		// public DiceRoll diceRoll { get; private set; }
-		public WebSocket socket;
 		public bool IsPlayerControlled = false;
 		public DateTime lastAction = DateTime.Now;
 		private DateTime lastAttack = DateTime.Now;
@@ -36,13 +34,11 @@ namespace cx3web.WorldObjects
 		// public ActionScoping actionScoping = ActionScoping.GlobalAndDefault;
 		// private Weapon equippedWeapon;
 		// public List<ScopedAction> scopedActions = new List<ScopedAction>();
-		public GameCharacter scopedTarget;
 		// public List<Spell> spells = new List<Spell>();
 		// public CharacterStats stats = new CharacterStats();
 		// public CharacterAlignments alignments = new CharacterAlignments();
 		// private Dictionary<GameCharacter, CharacterAlignments> impressions = new Dictionary<GameCharacter, CharacterAlignments>();
 		public bool Looted = false;
-		private Queue<Action<GameCharacter>> continues;
 		// public bool Alive {
 		// 	get {
 		// 		if (stats == null)
@@ -519,9 +515,9 @@ namespace cx3web.WorldObjects
 // 		public void PushStatsAttr () {
 // 			socket?.SendStatsAttr(stats.GetUiText());
 // 		}
-		public void PushUnlock () {
-			socket?.Send("u|-");
-		}
+		// public void PushUnlock () {
+		// 	socket?.Send("u|-");
+		// }
 // 		public void PrintPublic(string text)
 // 		{
 // 			mechanics.terminal.Print(new Output(text, OutputType.Public, this, this.Container));
