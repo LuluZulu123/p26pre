@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Handlers;
@@ -11,17 +12,19 @@ public class Plans : SocketHandler
 	{
 		var parts = raw.Split('|', 2);
 		
-		if (parts.Length != 2)
-			return;
-		
 		var cmd = parts[0];
-		var data = parts[1];
+		var data = () => parts[1];
 		
 		switch (cmd)
 		{
 			case "register":
-				Name = data;
+				Name = data();
 				connections.Add(this);
+				await PrintOwn($"{this} registered");
+				break;
+			
+			case "w":
+				await PrintOthers($"{this} says: {data()}");
 				break;
 			
 			case "lookup":
@@ -45,6 +48,7 @@ public class Plans : SocketHandler
 		if (raw.Length == 0)
 			return false;
 		
+		var data = raw.Skip(1).ToArray();
 		switch (raw[0])
 		{
 			case (byte)'d':
