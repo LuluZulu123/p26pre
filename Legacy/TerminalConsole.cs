@@ -15,13 +15,13 @@ public partial class TerminalConsole
 	{
 		// PrintGlobal(delimeter.AsCommand());
 	}
-	private string lastPrintedTime = "";
+	// private string lastPrintedTime = "";
 	// public async Task PrintGlobal(string text)
 	// {
 	// 	await mechanics.terminal.Print(new Output(text, OutputType.Global));
 	// }
-	public async Task Print(Output output)
-	{
+	// public async Task Print(Output output)
+	// {
 		// if (output.type == OutputType.Global) {
 		// 	foreach (var player in mechanics.players)
 		// 	{
@@ -37,7 +37,7 @@ public partial class TerminalConsole
 		// 	output.actor.Socket?.SendOutput(output.text);
 		
 		// if (output.type == OutputType.OwnOnly)
-			return;
+			// return;
 		
 		// foreach (var player in mechanics.world.GetRoommatesOf(output.actor))
 		// {
@@ -48,7 +48,7 @@ public partial class TerminalConsole
 
 		// if (ConsoleOutput.Count >= maxlines)
 		// 	ConsoleOutput.RemoveAt(0);
-	}
+	// }
 	// public string GetOutput(GameCharacter localPlayer)
 	// {
 	// 	var text = new StringBuilder();

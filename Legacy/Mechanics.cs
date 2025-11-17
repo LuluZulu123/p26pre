@@ -228,7 +228,7 @@ namespace cx3web
 		public GameCharacter SetNewPlayer(string name, string preset)
 		{
 			var player = new GameCharacter();
-			player.mechanics = this;
+			// player.mechanics = this;
 			// player.Setup(this);
 			// player.LoadPreset(preset);
 			// player.Name = name;
