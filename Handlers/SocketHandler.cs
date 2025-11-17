@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 
 public abstract class SocketHandler
 {
-	protected abstract Task HanldeInput (string raw);
+	protected virtual Task HanldeInput (string raw) => Task.CompletedTask;
+	protected virtual Task<bool> HanldeInput (byte[] raw) => Task.FromResult(false);
 	public string identifier => GetHashCode().ToString();
 	public override string ToString() {
 		return identifier;
@@ -35,6 +36,11 @@ public abstract class SocketHandler
 				result = await Socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
 			
 			first = false;
+			
+			var binaryUsed = await HanldeInput(buffer);
+			
+			if (binaryUsed)
+				continue;
 			
 			var input = Encoding.UTF8.GetString(buffer, 0, result.Count).Trim();
 			
