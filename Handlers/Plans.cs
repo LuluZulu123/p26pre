@@ -8,6 +8,11 @@ public class Plans : SocketHandler
 	private static HashSet<Plans> connections = new HashSet<Plans>();
 	public string Name { get; private set; } = string.Empty;
 	public override string ToString() => Name;
+	protected override async Task Unregister()
+	{
+		await PrintOthers($"{this} left");
+		connections.Remove(this);
+	}
 	protected override async Task HanldeInput(string raw)
 	{
 		var parts = raw.Split('|', 2);

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public abstract class SocketHandler
 {
+	protected virtual Task Unregister () => Task.CompletedTask;
 	protected virtual Task HanldeInput (string raw) => Task.CompletedTask;
 	protected virtual Task<bool> HanldeInput (byte[] raw) => Task.FromResult(false);
 	public string identifier => GetHashCode().ToString();
@@ -46,6 +47,8 @@ public abstract class SocketHandler
 			
 			await HanldeInput(input);
 		}
+		
+		await Unregister();
 		
 		await Socket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
 	}
