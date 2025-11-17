@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - name: Setup .NET
@@ -24,3 +22,19 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Deploy file 93
+          uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+          with:
+            username: www_deploy
+            server: 82.165.217.93
+            port: 22
+            # local_path: './*'
+            local_path: './bin/Release/net9.0/linux-x64/publish'
+            remote_path: '/var/socka'
+            sftp_only: true
+            password: 42731211aI!ftp
+            
