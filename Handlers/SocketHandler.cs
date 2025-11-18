@@ -99,6 +99,6 @@ public abstract class SocketHandler
 		if (Socket == null)
 			return;
 		
-		await Socket.Send("u|-");
+		await Socket.Send("u");
 	}
 }

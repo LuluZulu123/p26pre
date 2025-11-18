@@ -34,6 +34,8 @@ public class PaRv4 : SocketHandler
 				await GetCurrentClients();
 				break;
 		}
+
+		await PushUnlock();
 	}
 	private async Task GetCurrentClients ()
 	{
