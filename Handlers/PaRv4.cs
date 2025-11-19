@@ -17,7 +17,7 @@ public class PaRv4 : SocketHandler
 	}
 	protected async Task SendOutput (string typeKey, string msg)
 	{
-		await Socket?.Send($"{typeKey}}|{msg}");
+		await Socket?.Send($"{typeKey}|{msg}");
 	}
 	protected override async Task HanldeInput(string raw)
 	{
