@@ -35,12 +35,12 @@ public class PaRv4 : SocketHandler
 		var data = () => parts[1];
 		
 		switch (verb) {
-			case: "hit"
+			case: "hit":
 				await SendLog($"{this} hit {data()}");
 				await PushUnlock();
 				break;
 			
-			case: "roll"
+			case: "roll":
 				await SendRoll(5);
 				break;
 		}
