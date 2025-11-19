@@ -27,7 +27,7 @@ public class PaRv4 : SocketHandler
 	{
 		await Socket?.Send($"r|{diff}");
 	}
-	protected async Task HandleVerb (string msg)
+	protected async Task HandleVerb (string raw)
 	{
 		var parts = raw.Split('|', 2);
 		
