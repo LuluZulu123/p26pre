@@ -19,6 +19,32 @@ public class PaRv4 : SocketHandler
 	{
 		await Socket?.Send($"{typeKey}|{msg}");
 	}
+	protected async Task SendLog (string msg)
+	{
+		await Socket?.Send($"o|log|{msg}");
+	}
+	protected async Task SendRoll (int diff)
+	{
+		await Socket?.Send($"r|{diff}");
+	}
+	protected async Task HandleVerb (string msg)
+	{
+		var parts = raw.Split('|', 2);
+		
+		var verb = parts[0];
+		var data = () => parts[1];
+		
+		switch (verb) {
+			case: "hit"
+				await SendLog($"{this} hit {data()}");
+				await PushUnlock();
+				break;
+			
+			case: "roll"
+				await SendRoll(5);
+				break;
+		}
+	}
 	protected override async Task HanldeInput(string raw)
 	{
 		var parts = raw.Split('|', 2);
@@ -31,24 +57,24 @@ public class PaRv4 : SocketHandler
 			case "register":
 				Name = data();
 				connections.Add(this);
-				await SendOutput($"{this} registered PAR");
 				await Socket?.Send($"m");
+				await PushUnlock();
 				break;
 			
 			case "w":
 				await SendOutput($"{this} says: {data()}");
+				await PushUnlock();
 				break;
 			
 			case "v":
-				await SendOutput($"{this} does: {data()}");
+				await HandleVerb(data());
 				break;
 			
 			case "lookup":
 				await GetCurrentClients();
+				await PushUnlock();
 				break;
 		}
-
-		await PushUnlock();
 	}
 	private async Task GetCurrentClients ()
 	{
