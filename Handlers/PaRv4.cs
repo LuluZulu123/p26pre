@@ -11,8 +11,13 @@ public class PaRv4 : SocketHandler
 		await PrintOthers($"{this} left PAR");
 		connections.Remove(this);
 	}
-	protected async Task SendOutput (string msg) {
+	protected async Task SendOutput (string msg)
+	{
 		await Socket?.Send($"o|{msg}");
+	}
+	protected async Task SendOutput (string typeKey, string msg)
+	{
+		await Socket?.Send($"{typeKey}}|{msg}");
 	}
 	protected override async Task HanldeInput(string raw)
 	{
