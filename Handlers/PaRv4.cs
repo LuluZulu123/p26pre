@@ -11,6 +11,9 @@ public class PaRv4 : SocketHandler
 		await PrintOthers($"{this} left PAR");
 		connections.Remove(this);
 	}
+	protected async Task SendOutput (string msg) {
+		await client.Socket?.Send($"o|{msg}");
+	}
 	protected override async Task HanldeInput(string raw)
 	{
 		var parts = raw.Split('|', 2);
@@ -23,11 +26,16 @@ public class PaRv4 : SocketHandler
 			case "register":
 				Name = data();
 				connections.Add(this);
-				await PrintOwn($"{this} registered PAR");
+				await SendOutput($"{this} registered PAR");
+				await client.Socket?.Send($"m");
 				break;
 			
 			case "w":
-				await PrintOthers($"{this} says: {data()}");
+				await SendOutput($"{this} says: {data()}");
+				break;
+			
+			case "v":
+				await SendOutput($"{this} does: {data()}");
 				break;
 			
 			case "lookup":
@@ -42,7 +50,7 @@ public class PaRv4 : SocketHandler
 		foreach (var connection in connections)
 		{
 			var isMe = connection == this ? " (it's you!) (PAR)" : string.Empty;
-			await PrintOwn($"{connection}{isMe}");
+			await SendOutput($"{connection}{isMe}");
 		}
 	}
 }

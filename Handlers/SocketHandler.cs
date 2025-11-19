@@ -92,7 +92,7 @@ public abstract class SocketHandler
 			if (client == output.actor)
 				continue;
 			
-			client.Socket?.Send(output.text);
+			await client.Socket?.Send(output.text);
 		}
 	}
 	protected async Task PushUnlock () {
