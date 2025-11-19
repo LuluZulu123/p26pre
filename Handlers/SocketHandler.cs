@@ -89,6 +89,9 @@ public abstract class SocketHandler
 		
 		foreach (var client in clients.Where(x => x.roomIdentifier == output.actor.roomIdentifier))
 		{
+			if (client == null)
+				continue;
+			
 			if (client == output.actor)
 				continue;
 			

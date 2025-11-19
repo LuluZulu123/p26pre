@@ -12,7 +12,7 @@ public class PaRv4 : SocketHandler
 		connections.Remove(this);
 	}
 	protected async Task SendOutput (string msg) {
-		await client.Socket?.Send($"o|{msg}");
+		await Socket?.Send($"o|{msg}");
 	}
 	protected override async Task HanldeInput(string raw)
 	{
@@ -27,7 +27,7 @@ public class PaRv4 : SocketHandler
 				Name = data();
 				connections.Add(this);
 				await SendOutput($"{this} registered PAR");
-				await client.Socket?.Send($"m");
+				await Socket?.Send($"m");
 				break;
 			
 			case "w":
