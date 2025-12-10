@@ -35,7 +35,7 @@ public class ConnectorBase
 		
 		FieldInfoCache.Add(type, fields);
 	}
-	public static IEnumerable<T> GetResults<T> (string cmd) where T : DbEntity, new () {
+	public static async IEnumerable<T> GetResults<T> (string cmd) where T : DbEntity, new () {
 		ReadFields(typeof(T));
 		
 		var fields = FieldInfoCache[typeof(T)];
@@ -49,9 +49,9 @@ public class ConnectorBase
 		command.Connection = connection;
 		command.CommandText = cmd;
 		
-		using var reader = command.ExecuteReader();
+		using var reader = await command.ExecuteReaderAsync();
 		
-		while (reader.Read())
+		while (reader.Read()) // async????
 		{
 			var row = new T();
 			

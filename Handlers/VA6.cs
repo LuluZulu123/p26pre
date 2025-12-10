@@ -29,6 +29,7 @@ public class VA6 : SocketHandler
 	{
 		await Socket?.Send($"r|{diff}");
 	}
+	#region bl
 	protected async Task QueryUnit ()
 	{
 		foreach (var row in DB.VA6.Connector.GetResults<Unit>(@"SELECT * FROM unit"))
@@ -36,7 +37,8 @@ public class VA6 : SocketHandler
 			await SendOutput($"row {row.Class}");
 		}
 	}
-	protected async Task HandleVerb (string raw)
+	#endregion
+	protected async Task HandleView (string raw)
 	{
 		var parts = raw.Split('|', 2);
 		
@@ -70,23 +72,13 @@ public class VA6 : SocketHandler
 				await PushUnlock();
 				break;
 			
-			case "w":
-				await SendOutput($"{this} says: {data()}");
-				await PushUnlock();
-				break;
-			
 			case "q":
 				await QueryUnit();
 				await PushUnlock();
 				break;
 			
 			case "v":
-				await HandleVerb(data());
-				break;
-			
-			case "lookup":
-				await GetCurrentClients();
-				await PushUnlock();
+				await HandleView(data());
 				break;
 		}
 	}
