@@ -6,6 +6,7 @@ public abstract class SocketHandler
 {
 	protected virtual Task Unregister () => Task.CompletedTask;
 	protected virtual Task HanldeInput (string raw) => Task.CompletedTask;
+	public async Task FakeInput (string raw) => await HanldeInput(raw);
 	protected virtual Task<bool> HanldeInput (byte[] raw) => Task.FromResult(false);
 	public string identifier => GetHashCode().ToString();
 	public override string ToString() {
@@ -95,8 +96,21 @@ public abstract class SocketHandler
 			if (client == output.actor)
 				continue;
 			
-			await client.Socket?.Send(output.text);
+			await client.Send(output.text);
 		}
+	}
+	public async Task Send (string msg)
+	{
+		if (Program.IsDev)
+		{
+			Console.WriteLine($">{msg}");
+			return;
+		}
+		
+		if (Socket == null)
+			return;
+		
+		await Socket.Send(msg);
 	}
 	protected async Task PushUnlock () {
 		if (Socket == null)

@@ -1,16 +1,72 @@
+using System.Text.Json.Serialization;
+using DB;
+using Extensions;
+using Newtonsoft.Json;
+using Handler = Handlers.VA6;
+
 namespace VA6;
 
 public class Controller
 {
-    private static void Load (string cmd) {
-        DB.VA6.Connector.GetResults<Unit>(cmd);
-        // DB.VA6.Connector.GetResults<Unit>(@"SELECT * FROM unit");
+	public static async Task GetProfiles () {}
+	public static async Task GetUnits (Handler handler) {
+        if (handler.ProfileId == 0)
+            return;
+        
+		using var conn = await ConnectorBase.GetConnection("va6");
+		
+		var deb2 = conn.LoadGeneric(@"SELECT 
+                                        u.uid, 
+                                        u.profile_uid, 
+                                        u.start_hp, 
+                                        u.hp, 
+                                        u.class, 
+                                        u.class_hp, 
+                                        u.match_uid, 
+                                        u.alive, 
+                                        u.modify_time, 
+                                        u.unit_number, 
+                                        u.delete_time, 
+                                        u.sell_time, 
+                                        u.temp_hp_change, 
+                                        u.xp, 
+                                        u.max_xp, 
+                                        u.max_hp, 
+                                        u.gear_score, 
+                                        u.def, 
+                                        u.att, 
+                                        u.lvl, 
+                                        u.revive_cost, 
+                                        u.heal_cost, 
+                                        u.sell_price, 
+                                        u.buy_price
+                                    FROM
+                                        va6.v_unit u
+                                    WHERE
+                                        u.profile_uid = @profileId
+        ;", (x) => new {
+            Uid = x["uid"],
+            Class = x["class"],
+            Hp = x["hp"],
+            MaxHp = x["max_hp"],
+            Xp = x["xp"],
+            MaxXp = x["max_xp"],
+            GearScore = x["gear_score"],
+		}, ("profileId", handler.ProfileId));
+		
+		await foreach (var row in deb2)
+		{
+            await handler.Send(JsonConvert.SerializeObject(row));
+		}
+		
+		await conn.CloseAsync();
     }
-	public static void GetProfiles () {}
-	public static void GetUnits () {}
-	public static void GetItems () {}
-	public static void GetMatches () {}
-	public static void GetMap () {}
+	public static async Task GetItems () {}
+	public static async Task GetMatches () {}
+	public static async Task GetMap () {}
+	public static async Task SellUnit (uint unitId)
+	{
+	}
     // level_from_xp
     // max_xp_from_level
     // p_add_item
@@ -46,6 +102,4 @@ public class Controller
     // p_revive_unit
     // p_sell_unit
     // p_start_match
-	public static void SellUnit (uint unitId) {
-    }
 }

@@ -1,4 +1,5 @@
 using DB;
+using VA6;
 
 namespace Handlers;
 
@@ -6,58 +7,22 @@ public class VA6 : SocketHandler
 {
 	private static HashSet<VA6> connections = new HashSet<VA6>();
 	public string Name { get; private set; } = string.Empty;
+	public int ProfileId;
+	
 	public override string ToString() => Name;
 
 	protected override async Task Unregister()
 	{
-		await PrintOthers($"{this} left PAR");
+		await PrintOthers($"{this} left VA6");
 		connections.Remove(this);
-	}
-	protected async Task SendOutput (string msg)
-	{
-		await Socket?.Send($"o|{msg}");
-	}
-	protected async Task SendOutput (string typeKey, string msg)
-	{
-		await Socket?.Send($"{typeKey}|{msg}");
-	}
-	protected async Task SendLog (string msg)
-	{
-		await Socket?.Send($"o|log|{msg}");
-	}
-	protected async Task SendRoll (int diff)
-	{
-		await Socket?.Send($"r|{diff}");
-	}
-	#region bl
-	protected async Task QueryUnit ()
-	{
-		foreach (var row in DB.VA6.Connector.GetResults<Unit>(@"SELECT * FROM unit"))
-		{
-			await SendOutput($"row {row.Class}");
-		}
-	}
-	#endregion
-	protected async Task HandleView (string raw)
-	{
-		var parts = raw.Split('|', 2);
-		
-		var verb = parts[0];
-		var data = () => parts[1];
-		
-		switch (verb) {
-			case "hit":
-				await SendLog($"{this} hit {data()}");
-				await PushUnlock();
-				break;
-			
-			case "roll":
-				await SendRoll(5);
-				break;
-		}
 	}
 	protected override async Task HanldeInput(string raw)
 	{
+		if (Program.IsDev)
+		{
+			Console.WriteLine($"< {raw}");
+		}
+		
 		var parts = raw.Split('|', 2);
 		
 		var cmd = parts[0];
@@ -68,26 +33,19 @@ public class VA6 : SocketHandler
 			case "register":
 				Name = data();
 				connections.Add(this);
-				await Socket?.Send($"m");
 				await PushUnlock();
 				break;
 			
-			case "q":
-				await QueryUnit();
+			case "p":
+				int.TryParse(data(), out ProfileId);
+				await Send($"ProfileId {ProfileId}");
 				await PushUnlock();
 				break;
 			
-			case "v":
-				await HandleView(data());
+			case "u":
+				await Controller.GetUnits(this);
+				await PushUnlock();
 				break;
-		}
-	}
-	private async Task GetCurrentClients ()
-	{
-		foreach (var connection in connections)
-		{
-			var isMe = connection == this ? " (it's you!) (PAR)" : string.Empty;
-			await SendOutput($"{connection}{isMe}");
 		}
 	}
 }
