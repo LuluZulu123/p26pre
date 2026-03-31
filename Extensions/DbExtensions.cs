@@ -5,7 +5,7 @@ namespace Extensions;
 
 public static class DB
 {
-	public static async Task Exec (this MySqlConnection conn, string cmd, params (string, object)[] placeholder)
+	public static async Task<int> Exec (this MySqlConnection conn, string cmd, params (string, object)[] placeholder)
 	{
 		var command = new MySqlCommand();
 		
@@ -17,7 +17,7 @@ public static class DB
 			command.Parameters.AddWithValue(pair.Item1, pair.Item2);
 		}
 		
-		await command.ExecuteNonQuery();
+		return await command.ExecuteNonQueryAsync();
 	}
 	public static async IAsyncEnumerable<Tout> LoadGeneric<Tout> (this MySqlConnection conn, string cmd, Func<MySqlDataReader, Tout> builder, params (string, object)[] placeholder)
 	{

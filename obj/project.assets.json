@@ -72,7 +72,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.11": {
+      "Microsoft.NET.ILLink.Tasks/9.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -331,7 +331,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.11": {
+      "Microsoft.NET.ILLink.Tasks/9.0.14": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -589,10 +589,10 @@
         "lib/netstandard2.1/K4os.Hash.xxHash.xml"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.11": {
-      "sha512": "vvB9rtDmWaXgYkViT00KORBVmA3pcYsHlgd9vOPqL9sf5bKy3rvLMF1+sI1uUfVj28S3itirHlHmX5/kcpZKNw==",
+    "Microsoft.NET.ILLink.Tasks/9.0.14": {
+      "sha512": "+MeWjj5sGq6Oj/l0E9RPMgXDyCIPxczzCbGuvuVTZFEGiy2S/atsfoAoKUnkEin/GeGpN+HenCzRmiQKSc99eQ==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.11",
+      "path": "microsoft.net.illink.tasks/9.0.14",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -606,7 +606,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.11.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.14.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -911,25 +911,29 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.NET.ILLink.Tasks >= 9.0.11",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.14",
       "MySql.Data >= 9.5.0",
       "Newtonsoft.Json >= 13.0.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lukask\\.nuget\\packages\\": {}
+    "C:\\Users\\Luk\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj",
+      "projectUniqueName": "C:\\Users\\Luk\\p26pre\\p26pre.csproj",
       "projectName": "p26pre",
-      "projectPath": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\p26pre.csproj",
-      "packagesPath": "C:\\Users\\lukask\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lukask\\Documents\\Resize on Request\\p26pre\\obj\\",
+      "projectPath": "C:\\Users\\Luk\\p26pre\\p26pre.csproj",
+      "packagesPath": "C:\\Users\\Luk\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Luk\\p26pre\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lukask\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Luk\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -954,7 +958,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -963,7 +967,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.11, )",
+            "version": "[9.0.14, )",
             "autoReferenced": true
           },
           "MySql.Data": {
@@ -988,16 +992,28 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-            "version": "[9.0.11, 9.0.11]"
+            "version": "[9.0.14, 9.0.14]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[9.0.11, 9.0.11]"
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-            "version": "[9.0.11, 9.0.11]"
+            "version": "[9.0.14, 9.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[9.0.14, 9.0.14]"
           }
         ],
         "frameworkReferences": {
@@ -1008,7 +1024,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
