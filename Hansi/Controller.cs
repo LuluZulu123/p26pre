@@ -10,9 +10,9 @@ public class Controller
 {
 	private class Instruction {
 		public string Type;
-		public object Data;
+		public GenericData Data;
 	}
-	private class Order {
+	private class GenericData {
 		public string Id;
 		public object ClientId;
 	}
@@ -23,15 +23,14 @@ public class Controller
 
 		switch (instruction.Type) {
 			case "order":
-				var order = (Order)instruction.Data;
 				conn.LoadGeneric(@"REPLACE INTO hansi.order 
 									(id, client)
 								SELECT
 									@Id,
 									@Client,
         						;", (x) => 1, 
-									("Id", order.Id),
-									("Client", order.ClientId)
+									("Id", instruction.Data.Id),
+									("Client", instruction.Data.ClientId)
 								);
 				break;
 		}
