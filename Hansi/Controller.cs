@@ -14,7 +14,7 @@ public class Controller
 	}
 	private class GenericData {
 		public string Id;
-		public object ClientId;
+		public string ClientId;
 	}
 	public static async Task HandleSave (Handler handler, string data) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
