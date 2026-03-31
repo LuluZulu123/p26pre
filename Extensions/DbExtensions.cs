@@ -5,7 +5,7 @@ namespace Extensions;
 
 public static class DB
 {
-	public static async IAsyncEnumerable<Tout> Exec<Tout> (this MySqlConnection conn, string cmd, params (string, object)[] placeholder)
+	public static async Task Exec (this MySqlConnection conn, string cmd, params (string, object)[] placeholder)
 	{
 		var command = new MySqlCommand();
 		
