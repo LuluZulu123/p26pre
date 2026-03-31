@@ -15,7 +15,7 @@ public class Controller
 	public static async Task HandleSave (Handler handler, string data) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 		
-		Instruction instruction = JsonConvert.DeserializeObject(data);
+		var instruction = JsonConvert.DeserializeObject<Instruction>(data);
 
 		switch (instruction.Type) {
 			case "order":
