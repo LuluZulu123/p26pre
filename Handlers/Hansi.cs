@@ -32,6 +32,7 @@ public class Hansi : SocketHandler
 			
 			case "s": // save
 				// Name = data();
+				await Controller.HandleSave(this, data());
 				await PushUnlock();
 				break;
 			
