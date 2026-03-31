@@ -23,12 +23,12 @@ public class Controller
 
 		switch (instruction.Type) {
 			case "order":
-				conn.LoadGeneric(@"REPLACE INTO hansi.order 
+				conn.Exec(@"REPLACE INTO hansi.order 
 									(id, client)
 								SELECT
 									@Id,
 									@Client,
-        						;", (x) => 1, 
+        						;",  
 									("Id", instruction.Data.Id),
 									("Client", instruction.Data.ClientId)
 								);

@@ -5,6 +5,39 @@ namespace Extensions;
 
 public static class DB
 {
+	public static async IAsyncEnumerable<Tout> Exec<Tout> (this MySqlConnection conn, string cmd, params (string, object)[] placeholder)
+	{
+		var command = new MySqlCommand();
+		
+		command.Connection = conn;
+		command.CommandText = cmd;
+		
+		foreach (var pair in placeholder)
+		{
+			command.Parameters.AddWithValue(pair.Item1, pair.Item2);
+		}
+		
+		await command.ExecuteNonQuery();
+	}
+	public static async IAsyncEnumerable<Tout> LoadGeneric<Tout> (this MySqlConnection conn, string cmd, Func<MySqlDataReader, Tout> builder, params (string, object)[] placeholder)
+	{
+		var command = new MySqlCommand();
+		
+		command.Connection = conn;
+		command.CommandText = cmd;
+		
+		foreach (var pair in placeholder)
+		{
+			command.Parameters.AddWithValue(pair.Item1, pair.Item2);
+		}
+		
+		using var reader = (MySqlDataReader)await command.exce();
+		
+		while (await reader.ReadAsync())
+		{
+			yield return builder(reader);
+		}
+	}
 	public static async IAsyncEnumerable<Tout> LoadGeneric<Tout> (this MySqlConnection conn, string cmd, Func<MySqlDataReader, Tout> builder, params (string, object)[] placeholder)
 	{
 		var command = new MySqlCommand();
