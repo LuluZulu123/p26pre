@@ -12,6 +12,10 @@ public class Controller
 		public string Type;
 		public object Data;
 	}
+	private class Order {
+		public string Id;
+		public object ClientId;
+	}
 	public static async Task HandleSave (Handler handler, string data) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 		
@@ -19,14 +23,15 @@ public class Controller
 
 		switch (instruction.Type) {
 			case "order":
+				var order = (Order)instruction.Data;
 				conn.LoadGeneric(@"REPLACE INTO hansi.order 
 									(id, client)
 								SELECT
 									@Id,
 									@Client,
         						;", (x) => 1, 
-									("Id", instruction.Data.Id),
-									("Client", instruction.Data.ClientId)
+									("Id", order.Id),
+									("Client", order.ClientId)
 								);
 				break;
 		}
