@@ -23,7 +23,7 @@ public class Controller
 
 		switch (instruction.Type) {
 			case "order":
-				conn.Exec(@"REPLACE INTO hansi.order 
+				await conn.Exec(@"REPLACE INTO hansi.order 
 									(id, client)
 								SELECT
 									@Id,
