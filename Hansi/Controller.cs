@@ -28,7 +28,7 @@ public class Controller
 										(id, client)
 									SELECT
 										@Id,
-										@Client,
+										@Client
 									;",  
 										("Id", instruction.Data.Id),
 										("Client", instruction.Data.ClientId)
