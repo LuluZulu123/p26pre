@@ -13,9 +13,38 @@ public class Controller
 		public GenericData Data;
 	}
 	private class GenericData {
+		public string Type;
 		public string Id;
-		public string Data;
+		public object Data;
 	}
+	public static async Task HandleSave (Handler handler, string data) {
+		try {
+			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
+			
+			var instruction = JsonConvert.DeserializeObject<GenericData>(data);
+
+			await conn.Exec(@"REPLACE INTO hansi.data 
+								(id, data, user, type)
+							SELECT
+								@Id,
+								@Data,
+								@User,
+								@Type
+							;",  
+								("Type", instruction.Type),
+								("Id", instruction.Id),
+								("Data", JsonConvert.SerializeObject(instruction.Data)),
+								("User", handler.Name)
+							);
+							
+			await conn.CloseAsync();
+			} 
+		catch (System.Exception e)
+		{
+			Console.WriteLine($"web error");
+			Console.WriteLine(e);
+		}
+    }
 	// public static async Task HandleSaveOrder (Handler handler, string data) {
 	// 	try {
 	// 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
@@ -46,32 +75,6 @@ public class Controller
 	// 		Console.WriteLine(e);
 	// 	}
     // }
-	public static async Task HandleSave (Handler handler, string data) {
-		try {
-			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
-			
-			var instruction = JsonConvert.DeserializeObject<GenericData>(data);
-
-			await conn.Exec(@"REPLACE INTO hansi.data 
-								(id, data, user)
-							SELECT
-								@Id,
-								@Data,
-								@User
-							;",  
-								("Id", instruction.Id),
-								("Data", instruction.Data),
-								("User", handler.Name)
-							);
-							
-			await conn.CloseAsync();
-			} 
-		catch (System.Exception e)
-		{
-			Console.WriteLine($"web error");
-			Console.WriteLine(e);
-		}
-    }
 	public static async Task GetChanges (Handler handler, string refTime) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 		
