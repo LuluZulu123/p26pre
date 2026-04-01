@@ -14,9 +14,9 @@ public class Controller
 	}
 	private class GenericData {
 		public string Id;
-		public string ClientId;
+		public string Data;
 	}
-	public static async Task HandleSave (Handler handler, string data) {
+	public static async Task HandleSaveOrder (Handler handler, string data) {
 		try {
 			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 			
@@ -45,6 +45,54 @@ public class Controller
 			Console.WriteLine($"web error");
 			Console.WriteLine(e);
 		}
+    }
+	public static async Task HandleSave (Handler handler, string data) {
+		try {
+			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
+			
+			var instruction = JsonConvert.DeserializeObject<GenericData>(data);
+
+			await conn.Exec(@"REPLACE INTO hansi.data 
+								(id, data, user)
+							SELECT
+								@Id,
+								@Data,
+								@User
+							;",  
+								("Id", instruction.Id),
+								("Data", instruction.Data),
+								("User", handler.Name)
+							);
+							
+			await conn.CloseAsync();
+			} 
+		catch (System.Exception e)
+		{
+			Console.WriteLine($"web error");
+			Console.WriteLine(e);
+		}
+    }
+	public static async Task GetChanges (Handler handler, string refTime) {
+		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
+		
+		var deb2 = conn.LoadGeneric(@"SELECT 
+                                        d.*
+                                    FROM
+                                        hansi.v_data d
+									WHERE
+										d.modify_time > @refTime
+        ;", (x) => new {
+            Id = x["id"],
+            Data = x["data"],
+            ModifyTime = x["modify_time"],
+		}, ("refTime", refTime));
+		
+		await foreach (var row in deb2)
+		{
+            await handler.Send(JsonConvert.SerializeObject(row));
+		}
+		
+		await conn.CloseAsync();
     }
 	public static async Task GetOrders (Handler handler) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi

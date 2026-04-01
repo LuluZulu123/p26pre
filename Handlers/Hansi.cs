@@ -37,6 +37,11 @@ public class Hansi : SocketHandler
 				break;
 			
 			case "l": // load
+				await Controller.GetChanges(this, data());
+				await PushUnlock();
+				break;
+			
+			case "o": // deprecated
 				await Controller.GetOrders(this);
 				await PushUnlock();
 				break;
