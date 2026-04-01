@@ -16,36 +16,36 @@ public class Controller
 		public string Id;
 		public string Data;
 	}
-	public static async Task HandleSaveOrder (Handler handler, string data) {
-		try {
-			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
+	// public static async Task HandleSaveOrder (Handler handler, string data) {
+	// 	try {
+	// 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 			
-			var instruction = JsonConvert.DeserializeObject<Instruction>(data);
+	// 		var instruction = JsonConvert.DeserializeObject<Instruction>(data);
 
-			switch (instruction.Type) {
-				case "order":
-					await conn.Exec(@"REPLACE INTO hansi.order 
-										(id, client)
-									SELECT
-										@Id,
-										@Client
-									;",  
-										("Id", instruction.Data.Id),
-										("Client", instruction.Data.ClientId)
-									);
-					break;
-			}
+	// 		switch (instruction.Type) {
+	// 			case "order":
+	// 				await conn.Exec(@"REPLACE INTO hansi.order 
+	// 									(id, client)
+	// 								SELECT
+	// 									@Id,
+	// 									@Client
+	// 								;",  
+	// 									("Id", instruction.Data.Id),
+	// 									("Client", instruction.Data.ClientId)
+	// 								);
+	// 				break;
+	// 		}
 
-			// {"Type":"order","Data":{"CreateTime":"2026-03-31T10:20:17.606+02:00","Id":"47ccb48b-b245-4871-93c2-327b0de7518f","Cart":{"ArticleCodes":{}},"ClientId":"031b8cef-ce4f-4558-bd9d-6fbd4ef62ec9"}}
+	// 		// {"Type":"order","Data":{"CreateTime":"2026-03-31T10:20:17.606+02:00","Id":"47ccb48b-b245-4871-93c2-327b0de7518f","Cart":{"ArticleCodes":{}},"ClientId":"031b8cef-ce4f-4558-bd9d-6fbd4ef62ec9"}}
 
-			await conn.CloseAsync();
-			} 
-		catch (System.Exception e)
-		{
-			Console.WriteLine($"web error");
-			Console.WriteLine(e);
-		}
-    }
+	// 		await conn.CloseAsync();
+	// 		} 
+	// 	catch (System.Exception e)
+	// 	{
+	// 		Console.WriteLine($"web error");
+	// 		Console.WriteLine(e);
+	// 	}
+    // }
 	public static async Task HandleSave (Handler handler, string data) {
 		try {
 			using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
