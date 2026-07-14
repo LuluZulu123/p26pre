@@ -95,6 +95,8 @@ public class Controller
             await handler.Send("m|g|" + JsonConvert.SerializeObject(row));
 		}
 		
+		await handler.Send("-m");
+		
 		await conn.CloseAsync();
     }
 	public static async Task GetOrders (Handler handler) {
