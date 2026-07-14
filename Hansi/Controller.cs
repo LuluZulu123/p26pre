@@ -92,7 +92,7 @@ public class Controller
 		
 		await foreach (var row in deb2)
 		{
-            await handler.Send(JsonConvert.SerializeObject(row));
+            await handler.Send("m|g|" + JsonConvert.SerializeObject(row));
 		}
 		
 		await conn.CloseAsync();
