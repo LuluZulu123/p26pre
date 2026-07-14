@@ -88,6 +88,7 @@ public class Controller
             Id = x["id"],
             Data = x["data"],
             ModifyTime = x["modify_time"],
+            Type = x["type"],
 		}, ("refTime", refTime));
 		
 		await foreach (var row in deb2)
