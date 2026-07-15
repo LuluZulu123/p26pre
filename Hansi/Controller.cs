@@ -75,6 +75,45 @@ public class Controller
 	// 		Console.WriteLine(e);
 	// 	}
     // }
+	public static async Task GetArticles (Handler handler, string searchTerm) {
+		using var conn = await ConnectorBase.GetConnection("hansi");
+		
+		var deb2 = conn.LoadGeneric(@"SELECT 
+										d.*
+									FROM
+										hansi.v_datanorm_articles d
+									WHERE
+										d.code LIKE @searchTermLike
+									OR
+										d.name LIKE @searchTermLike
+									OR
+										d.description LIKE @searchTermLike
+									ORDER BY
+										d.code = @searchTerm
+									OR
+										d.name = @searchTerm
+									OR
+										d.description = @searchTerm
+									DESC
+									LIMIT
+										20
+        ;", (x) => new {
+            Code = x["code"],
+            Name = x["name"],
+            Description = x["description"],
+            Price = x["price"],
+		}, 
+		("searchTerm", searchTerm),
+		("searchTermLike", $"%{searchTerm}%")
+		);
+		
+		await foreach (var row in deb2)
+		{
+            await handler.Send("sg|" + JsonConvert.SerializeObject(row));
+		}
+		
+		await conn.CloseAsync();
+    }
 	public static async Task GetChanges (Handler handler, string refTime) {
 		using var conn = await ConnectorBase.GetConnection("va6"); // Hansi
 		

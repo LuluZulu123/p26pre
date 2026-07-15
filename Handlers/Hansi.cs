@@ -41,6 +41,11 @@ public class Hansi : SocketHandler
 				await PushUnlock();
 				break;
 			
+			case "a": // autocomplete
+				await Controller.GetArticles(this, data());
+				await PushUnlock();
+				break;
+			
 			case "o": // deprecated
 				await Controller.GetOrders(this);
 				await PushUnlock();
