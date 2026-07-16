@@ -30,6 +30,11 @@ public class Hansi : SocketHandler
 				await PushUnlock();
 				break;
 			
+			case "rename":
+				Name = data();
+				await PushUnlock();
+				break;
+			
 			case "s": // save
 				// Name = data();
 				await Controller.HandleSave(this, data());
