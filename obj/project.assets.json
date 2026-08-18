@@ -72,7 +72,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.17": {
+      "Microsoft.NET.ILLink.Tasks/9.0.18": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -331,7 +331,7 @@
           }
         }
       },
-      "Microsoft.NET.ILLink.Tasks/9.0.17": {
+      "Microsoft.NET.ILLink.Tasks/9.0.18": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -589,10 +589,10 @@
         "lib/netstandard2.1/K4os.Hash.xxHash.xml"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/9.0.17": {
-      "sha512": "P5qY/hIYMlo0+QRM0W3Gd/SRf20TX+z5W5NwpdzkOk0FtgcbSTNwNcYBRNDgfThFcLpcDFslz65RcGqWOq00/w==",
+    "Microsoft.NET.ILLink.Tasks/9.0.18": {
+      "sha512": "ztGVXB28bi8SeplFmAx+4MkqP1ieA4UNzj/M3qyyz5tLa37Ln8x8LuaXdxzzoOdaucjQBKXSdCMFSbpQaNGIEg==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/9.0.17",
+      "path": "microsoft.net.illink.tasks/9.0.18",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -606,7 +606,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.9.0.17.nupkg.sha512",
+        "microsoft.net.illink.tasks.9.0.18.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -911,7 +911,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
-      "Microsoft.NET.ILLink.Tasks >= 9.0.17",
+      "Microsoft.NET.ILLink.Tasks >= 9.0.18",
       "MySql.Data >= 9.5.0",
       "Newtonsoft.Json >= 13.0.4"
     ]
@@ -963,7 +963,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[9.0.17, )",
+            "version": "[9.0.18, )",
             "autoReferenced": true
           },
           "MySql.Data": {
@@ -989,15 +989,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-            "version": "[9.0.17, 9.0.17]"
+            "version": "[9.0.18, 9.0.18]"
           }
         ],
         "frameworkReferences": {
@@ -1008,7 +1008,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.109/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.110/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

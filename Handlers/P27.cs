@@ -1,0 +1,38 @@
+using DB;
+
+namespace Handlers;
+
+public class P27 : SocketHandler
+{
+	private static HashSet<P27> connections = new HashSet<P27>();
+	public string Name { get; private set; } = string.Empty;
+	
+	public override string ToString() => Name;
+
+	protected override async Task Unregister()
+	{
+		await PrintOthers($"{this} left P27");
+		connections.Remove(this);
+	}
+	protected override async Task HanldeInput(string raw)
+	{
+		var parts = raw.Split('|', 2);
+		
+		var cmd = parts[0];
+		var data = () => parts[1];
+		
+		switch (cmd)
+		{
+			case "r": // register
+				Name = data();
+				connections.Add(this);
+				await PushUnlock();
+				break;
+			
+			case "u":
+				await Unregister();
+				await PushUnlock();
+				break;
+		}
+	}
+}
